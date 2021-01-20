@@ -6,13 +6,13 @@
                     <div class="card card-custom">
                         <div class="card-header">Cadastro de Usuários</div>
                         <ul class="list-group list-group-flush" v-if="listaNomes.length">
-                            <li class="list-group-item" v-for="item in listaNomes">
+                            <li class="list-group-item" v-for="(item, index) in listaNomes">
                                 {{ item.name }}
                                 <div class="buttons">
                                     <span>
                                         <i class="fas fa-pen"></i> Editar
                                     </span>
-                                    <span>
+                                    <span v-on:click="removeUser({ indice: index, id: item.id })">
                                         <i class="fas fa-trash"></i> Deletar
                                     </span>
                                 </div>
@@ -41,11 +41,12 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
     data() {
         return {
-            listaNomes:[],
+            listaNomes: [],
             nome: "",
         }
     },
@@ -60,6 +61,29 @@ export default {
                 nome : this.nome
             })
            this.listaNomes.push({name: this.nome})
+        },
+        removeUser(usuario){
+           Swal.fire({
+                title: 'Tem certeza que deseja remover?',
+                text: "Não é possivel reverter essa ação!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#bb86fc',
+                cancelButtonColor: '#cf6679',
+                confirmButtonText: 'Sim!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                   axios.delete(`http://localhost:8000/api/users?id=${usuario.id}`)
+                    .then(function () {
+                        Swal.fire(
+                        'Removido!',
+                        'nome removido',
+                        'success'
+                        )
+                    })
+                    this.listaNomes.splice(usuario.indice, 1)
+                }
+            })
         }
     },
     beforeMount() {
