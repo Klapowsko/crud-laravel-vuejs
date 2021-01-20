@@ -37,16 +37,20 @@ class UsuariosController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $nome = $request->input('nome');
+
+        DB::table('usuarios')
+            ->where('id', $id)
+            ->update(['name' => $nome]);
     }
 
 

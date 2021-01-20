@@ -6433,7 +6433,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
 
                 _context2.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('http://localhost:8000/api/users', {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('http://localhost:8000/api/users/add', {
                   nome: _this2.nome
                 });
 
@@ -6463,7 +6463,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         confirmButtonText: 'Sim!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          axios__WEBPACK_IMPORTED_MODULE_1___default().delete("http://localhost:8000/api/users?id=".concat(usuario.id)).then(function () {
+          axios__WEBPACK_IMPORTED_MODULE_1___default().delete("http://localhost:8000/api/users/delete?id=".concat(usuario.id)).then(function () {
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Removido!', 'nome removido', 'success');
           });
 
@@ -6472,6 +6472,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     editUser: function editUser(usuario) {
+      var _this4 = this;
+
       sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
         title: 'Editar Usuario',
         input: 'text',
@@ -6484,28 +6486,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         confirmButtonColor: '#bb86fc',
         cancelButtonColor: '#cf6679',
         showLoaderOnConfirm: true,
-        preConfirm: function preConfirm(login) {
-          return fetch("//api.github.com/users/".concat(login)).then(function (response) {
-            if (!response.ok) {
-              throw new Error(response.statusText);
-            }
-
-            return response.json();
-          })["catch"](function (error) {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().showValidationMessage("Request failed: ".concat(error));
+        preConfirm: function preConfirm(nome) {
+          axios__WEBPACK_IMPORTED_MODULE_1___default().post("http://localhost:8000/api/users/edit", {
+            id: usuario.id,
+            nome: nome
+          }).then(function (response) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Editado!', 'nome editado', 'success');
           });
+          _this4.listaNomes[usuario.indice].name = nome;
         },
         allowOutsideClick: function allowOutsideClick() {
           return !sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().isLoading();
         }
-      }).then(function (result) {
-        if (result.isConfirmed) {
-          sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
-            title: "".concat(result.value.login, "'s avatar"),
-            imageUrl: result.value.avatar_url
-          });
-        }
-      });
+      }).then(function (result) {});
     }
   },
   beforeMount: function beforeMount() {

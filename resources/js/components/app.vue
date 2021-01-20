@@ -57,7 +57,7 @@ export default {
         },
         async insertUser() {
             if (this.nome === "") { alert("Insira um nome válido!"); }
-            await axios.post('http://localhost:8000/api/users', {
+            await axios.post('http://localhost:8000/api/users/add', {
                 nome : this.nome
             })
            this.listaNomes.push({name: this.nome})
@@ -73,7 +73,7 @@ export default {
                 confirmButtonText: 'Sim!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                   axios.delete(`http://localhost:8000/api/users?id=${usuario.id}`)
+                   axios.delete(`http://localhost:8000/api/users/delete?id=${usuario.id}`)
                     .then(function () {
                         Swal.fire(
                         'Removido!',
@@ -98,28 +98,23 @@ export default {
                 confirmButtonColor: '#bb86fc',
                 cancelButtonColor: '#cf6679',
                 showLoaderOnConfirm: true,
-                preConfirm: (login) => {
-                    return fetch(`//api.github.com/users/${login}`)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error(response.statusText)
-                            }
-                            return response.json()
-                        })
-                        .catch(error => {
-                            Swal.showValidationMessage(
-                                `Request failed: ${error}`
-                            )
-                        })
+                preConfirm: (nome) => {
+                    axios.post("http://localhost:8000/api/users/edit", {
+                        id: usuario.id,
+                        nome: nome
+                    })
+                    .then(response => {
+                        Swal.fire(
+                            'Editado!',
+                            'nome editado',
+                            'success'
+                        )
+                    })
+                    this.listaNomes[usuario.indice].name = nome;
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: `${result.value.login}'s avatar`,
-                        imageUrl: result.value.avatar_url
-                    })
-                }
+
             })
         }
     },
