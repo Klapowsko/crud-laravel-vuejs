@@ -5,13 +5,10 @@
                 <div class="col-md-8">
                     <div class="card card-custom">
                         <div class="card-header">Cadastro de Usuários</div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                        <ul class="list-group list-group-flush" v-if="listaNomes.length">
+                            <li class="list-group-item" v-for="item in listaNomes">{{ item.name }}</li>
                         </ul>
+                        <li class="list-group-item" v-else>Nenhum item encontrado.</li>
                     </div>
                 </div>
             </div>
@@ -33,9 +30,23 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-    mounted() {
-        console.log('Component mounted.')
+    data() {
+        return {
+            listaNomes:[],
+        }
+    },
+    methods: {
+        async allUsers() {
+            let nomes = await axios.get('http://localhost:8000/api/users');
+            this.listaNomes = nomes.data
+        }
+    },
+    beforeMount() {
+        this.allUsers()
+        console.log(this.listaNomes)
     }
 }
 </script>
