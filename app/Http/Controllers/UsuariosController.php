@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +26,13 @@ class UsuariosController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request);
+        $name = $request->input('nome');
+
+        DB::table('usuarios')->insert([
+            'name' => $name,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
     }
 
 

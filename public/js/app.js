@@ -1931,9 +1931,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     insertUser: function insertUser() {
-      if (this.nome === "") {
-        alert("Insira um nome válido!");
-      }
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (_this2.nome === "") {
+                  alert("Insira um nome válido!");
+                }
+
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('http://localhost:8000/api/users', {
+                  nome: _this2.nome
+                });
+
+              case 3:
+                _this2.listaNomes.push({
+                  name: _this2.nome
+                });
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   },
   beforeMount: function beforeMount() {

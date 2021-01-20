@@ -44,8 +44,12 @@ export default {
             let nomes = await axios.get('http://localhost:8000/api/users');
             this.listaNomes = nomes.data
         },
-        insertUser() {
+        async insertUser() {
             if (this.nome === "") { alert("Insira um nome válido!"); }
+            await axios.post('http://localhost:8000/api/users', {
+                nome : this.nome
+            })
+           this.listaNomes.push({name: this.nome})
         }
     },
     beforeMount() {
