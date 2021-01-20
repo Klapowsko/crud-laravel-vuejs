@@ -6,7 +6,17 @@
                     <div class="card card-custom">
                         <div class="card-header">Cadastro de Usuários</div>
                         <ul class="list-group list-group-flush" v-if="listaNomes.length">
-                            <li class="list-group-item" v-for="item in listaNomes">{{ item.name }}</li>
+                            <li class="list-group-item" v-for="item in listaNomes">
+                                {{ item.name }}
+                                <div class="buttons">
+                                    <span>
+                                        <i class="fas fa-pen"></i> Editar
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-trash"></i> Deletar
+                                    </span>
+                                </div>
+                            </li>
                         </ul>
                         <li class="list-group-item" v-else>Nenhum item encontrado.</li>
                     </div>
