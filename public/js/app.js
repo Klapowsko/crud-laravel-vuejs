@@ -1861,6 +1861,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -37357,21 +37375,88 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Components")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
+    return _c("div", { staticClass: "body" }, [
+      _c("div", { staticClass: "container h-100" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "row h-100 mt-5 justify-content-center align-items-center"
+          },
+          [
+            _c("div", { staticClass: "col-md-8" }, [
+              _c("div", { staticClass: "card card-custom" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _vm._v("Cadastro de Usuários")
+                ]),
+                _vm._v(" "),
+                _c("ul", { staticClass: "list-group list-group-flush" }, [
+                  _c("li", { staticClass: "list-group-item" }, [
+                    _vm._v("Cras justo odio")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "list-group-item" }, [
+                    _vm._v("Dapibus ac facilisis in")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "list-group-item" }, [
+                    _vm._v("Morbi leo risus")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "list-group-item" }, [
+                    _vm._v("Porta ac consectetur ac")
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "list-group-item" }, [
+                    _vm._v("Vestibulum at eros")
+                  ])
+                ])
+              ])
             ])
-          ])
-        ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "row h-100 mt-5 justify-content-center align-items-center"
+          },
+          [
+            _c("div", { staticClass: "col-md-8" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "label",
+                  { staticClass: "text-white", attrs: { for: "input-nome" } },
+                  [_vm._v("Nome do Usuário:")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "input-nome",
+                    "aria-describedby": "nome",
+                    placeholder: "Insira o nome"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary-sell mt-2",
+                    attrs: { type: "submit" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Cadastrar\n                    "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
       ])
     ])
   }

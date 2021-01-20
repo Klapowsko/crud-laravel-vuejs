@@ -10944,4 +10944,17 @@ a.text-dark:focus {
   }
 }
 
+body {
+  background-color: #121212;
+}
+
+.card-custom {
+  background-color: #fffff;
+}
+
+.btn-primary-sell {
+  background-color: #BB86fc;
+  color: white;
+}
+
 
