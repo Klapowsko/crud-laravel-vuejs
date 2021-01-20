@@ -1901,7 +1901,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      listaNomes: []
+      listaNomes: [],
+      nome: ""
     };
   },
   methods: {
@@ -1928,11 +1929,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
+    },
+    insertUser: function insertUser() {
+      if (this.nome === "") {
+        alert("Insira um nome válido!");
+      }
     }
   },
   beforeMount: function beforeMount() {
     this.allUsers();
-    console.log(this.listaNomes);
   }
 });
 
@@ -38211,57 +38216,69 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "div",
+        {
+          staticClass:
+            "row h-100 mt-5 justify-content-center align-items-center"
+        },
+        [
+          _c("div", { staticClass: "col-md-8" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "label",
+                { staticClass: "text-white", attrs: { for: "input-nome" } },
+                [_vm._v("Nome do Usuário:")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.nome,
+                    expression: "nome"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "input-nome",
+                  "aria-describedby": "nome",
+                  placeholder: "Insira o nome"
+                },
+                domProps: { value: _vm.nome },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.nome = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary-sell mt-2",
+                  attrs: { type: "submit" },
+                  on: { click: _vm.insertUser }
+                },
+                [
+                  _vm._v(
+                    "\n                        Cadastrar\n                    "
+                  )
+                ]
+              )
+            ])
+          ])
+        ]
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "row h-100 mt-5 justify-content-center align-items-center"
-      },
-      [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "label",
-              { staticClass: "text-white", attrs: { for: "input-nome" } },
-              [_vm._v("Nome do Usuário:")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "input-nome",
-                "aria-describedby": "nome",
-                placeholder: "Insira o nome"
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary-sell mt-2",
-                attrs: { type: "submit" }
-              },
-              [
-                _vm._v(
-                  "\n                        Cadastrar\n                    "
-                )
-              ]
-            )
-          ])
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

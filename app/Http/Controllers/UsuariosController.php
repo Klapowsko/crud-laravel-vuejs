@@ -10,11 +10,12 @@ class UsuariosController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        return json_encode(DB::table('usuarios')->get());
+        $listaUsuarios = DB::table('usuarios')->get();
+        return response()->json($listaUsuarios);
     }
 
     /**
@@ -22,9 +23,9 @@ class UsuariosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        dd($request);
     }
 
 

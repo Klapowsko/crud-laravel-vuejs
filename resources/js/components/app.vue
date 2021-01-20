@@ -17,9 +17,9 @@
                     <div class="form-group">
                         <label for="input-nome" class="text-white">Nome do Usuário:</label>
                         <input type="text" class="form-control" id="input-nome"
-                               aria-describedby="nome"
+                               aria-describedby="nome" v-model="nome"
                                placeholder="Insira o nome">
-                        <button type="submit" class="btn btn-primary-sell mt-2">
+                        <button type="submit" class="btn btn-primary-sell mt-2" v-on:click="insertUser">
                             Cadastrar
                         </button>
                     </div>
@@ -36,17 +36,20 @@ export default {
     data() {
         return {
             listaNomes:[],
+            nome: "",
         }
     },
     methods: {
         async allUsers() {
             let nomes = await axios.get('http://localhost:8000/api/users');
             this.listaNomes = nomes.data
+        },
+        insertUser() {
+            if (this.nome === "") { alert("Insira um nome válido!"); }
         }
     },
     beforeMount() {
         this.allUsers()
-        console.log(this.listaNomes)
-    }
+    },
 }
 </script>

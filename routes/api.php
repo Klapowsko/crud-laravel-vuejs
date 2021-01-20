@@ -15,3 +15,4 @@ use App\Http\Controllers\UsuariosController;
 */
 
 Route::get('/users', [UsuariosController::class, 'index']);
+Route::post('/users', [UsuariosController::class, 'create']);
