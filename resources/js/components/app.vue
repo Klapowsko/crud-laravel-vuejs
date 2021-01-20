@@ -9,7 +9,7 @@
                             <li class="list-group-item" v-for="(item, index) in listaNomes">
                                 {{ item.name }}
                                 <div class="buttons">
-                                    <span>
+                                    <span v-on:click="editUser({ indice: index, id: item.id })">
                                         <i class="fas fa-pen"></i> Editar
                                     </span>
                                     <span v-on:click="removeUser({ indice: index, id: item.id })">
@@ -82,6 +82,43 @@ export default {
                         )
                     })
                     this.listaNomes.splice(usuario.indice, 1)
+                }
+            })
+        },
+        editUser(usuario) {
+            Swal.fire({
+                title: 'Editar Usuario',
+                input: 'text',
+                inputValue: this.listaNomes[usuario.indice].name,
+                inputAttributes: {
+                    autocapitalize: 'off'
+                },
+                showCancelButton: true,
+                confirmButtonText: 'Editar',
+                confirmButtonColor: '#bb86fc',
+                cancelButtonColor: '#cf6679',
+                showLoaderOnConfirm: true,
+                preConfirm: (login) => {
+                    return fetch(`//api.github.com/users/${login}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(response.statusText)
+                            }
+                            return response.json()
+                        })
+                        .catch(error => {
+                            Swal.showValidationMessage(
+                                `Request failed: ${error}`
+                            )
+                        })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: `${result.value.login}'s avatar`,
+                        imageUrl: result.value.avatar_url
+                    })
                 }
             })
         }

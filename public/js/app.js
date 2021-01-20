@@ -6470,6 +6470,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this3.listaNomes.splice(usuario.indice, 1);
         }
       });
+    },
+    editUser: function editUser(usuario) {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+        title: 'Editar Usuario',
+        input: 'text',
+        inputValue: this.listaNomes[usuario.indice].name,
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Editar',
+        confirmButtonColor: '#bb86fc',
+        cancelButtonColor: '#cf6679',
+        showLoaderOnConfirm: true,
+        preConfirm: function preConfirm(login) {
+          return fetch("//api.github.com/users/".concat(login)).then(function (response) {
+            if (!response.ok) {
+              throw new Error(response.statusText);
+            }
+
+            return response.json();
+          })["catch"](function (error) {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().showValidationMessage("Request failed: ".concat(error));
+          });
+        },
+        allowOutsideClick: function allowOutsideClick() {
+          return !sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().isLoading();
+        }
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+            title: "".concat(result.value.login, "'s avatar"),
+            imageUrl: result.value.avatar_url
+          });
+        }
+      });
     }
   },
   beforeMount: function beforeMount() {
@@ -46386,7 +46422,25 @@ var render = function() {
                             "\n                            "
                         ),
                         _c("div", { staticClass: "buttons" }, [
-                          _vm._m(0, true),
+                          _c(
+                            "span",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.editUser({
+                                    indice: index,
+                                    id: item.id
+                                  })
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-pen" }),
+                              _vm._v(
+                                " Editar\n                                "
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
                           _c(
                             "span",
@@ -46482,17 +46536,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("i", { staticClass: "fas fa-pen" }),
-      _vm._v(" Editar\n                                ")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
