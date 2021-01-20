@@ -23,13 +23,13 @@ class UsuariosController extends Controller
      * Show the form for creating a new resource.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return int
      */
     public function create(Request $request)
     {
         $name = $request->input('nome');
 
-        DB::table('usuarios')->insert([
+       return DB::table('usuarios')->insertGetId([
             'name' => $name,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()

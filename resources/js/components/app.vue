@@ -56,11 +56,15 @@ export default {
             this.listaNomes = nomes.data
         },
         async insertUser() {
+            let id = 0;
             if (this.nome === "") { alert("Insira um nome válido!"); }
+
             await axios.post('http://localhost:8000/api/users/add', {
                 nome : this.nome
+            }).then(response => {
+                id = response;
             })
-           this.listaNomes.push({name: this.nome})
+           this.listaNomes.push({id: id, name: this.nome})
         },
         removeUser(usuario){
            Swal.fire({

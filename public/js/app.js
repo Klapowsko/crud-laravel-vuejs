@@ -6424,25 +6424,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var id;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                id = 0;
+
                 if (_this2.nome === "") {
                   alert("Insira um nome válido!");
                 }
 
-                _context2.next = 3;
+                _context2.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().post('http://localhost:8000/api/users/add', {
                   nome: _this2.nome
-                });
-
-              case 3:
-                _this2.listaNomes.push({
-                  name: _this2.nome
+                }).then(function (response) {
+                  id = response;
                 });
 
               case 4:
+                _this2.listaNomes.push({
+                  id: id,
+                  name: _this2.nome
+                });
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
